@@ -1,0 +1,17 @@
+#main_field
+{
+    width: 500px;
+    height: 500px;
+    border: solid 3px black;
+    margin: auto;
+}
+* BODY button
+{
+    text-align: center;
+    margin: 10px;
+}
+#buttons_block
+{
+    margin: 10px;
+    text-align:center;
+}

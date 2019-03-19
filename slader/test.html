@@ -1,0 +1,29 @@
+<head>
+    <title>Here will be a title</title>
+    <link rel="stylesheet" type="text/css" href="style.css" >
+    <body>
+<div id="main_field"></div>
+<div id="buttons_block"><button onclick="prev()">Предыдущая</button><button onclick="next()">Следующая</button></div>
+<script>
+    var mass = ['1.jpg','2.jpg','3.jpg'];
+    var point = 0;
+    var main_field = document.getElementById("main_field");
+    main_field.style.backgroundImage = "url("+ mass[point] +")";
+    console.log(mass[1]);
+    function next() {
+        if (point < 2)
+        {
+            ++point;
+            main_field.style.backgroundImage = "url("+ mass[point] +")";
+        }
+    }
+    function prev() {
+        if (point > 0)
+        {
+            --point;
+            main_field.style.backgroundImage = "url("+ mass[point] +")";
+        }
+    }
+</script>
+</body>
+</head>

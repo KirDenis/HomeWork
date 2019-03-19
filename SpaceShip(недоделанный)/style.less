@@ -1,0 +1,47 @@
+@bg-color: rgb(0,0,0);
+@red:rgb(234,0,0);
+@blue:rgb(32,42,234);
+@green:rgb(26,125,26);
+@yellow:rgb(255,221,0);
+@ship: url("images/space-ship-no-fiel.png");
+
+.game-field{
+	position: fixed;
+	background-color: @bg-color;
+	width: 100%;
+	height: 100%;
+}
+.ship{
+	position: absolute;
+	width: 150px;
+	height: 150px;
+	background: @ship;
+	background-size: contain;
+	background-repeat: no-repeat;
+}
+.rorateShipRight{
+	animation-duration: 1.5s;
+	animation-name: rorateRight;
+	animation-fill-mode:forwards;
+}
+.rorateShipLeft{
+	animation-duration: 1.5s;
+	animation-name: rorateLeft;
+	animation-fill-mode:forwards;
+}
+@keyframes rorateRight{
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(180deg);
+  }
+	
+}@keyframes rorateLeft{
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(-180deg);
+  }
+}

@@ -1,0 +1,33 @@
+<html>
+<body>
+<input type="button" id="start" value="Старт">
+<input type="button" id="stop" value="Стоп">
+<hr/>
+Мерцание экрана
+</body>
+</html>
+<script src="avdfunctions.js"></script>
+<script>
+    'use strict';
+    var timer = null;
+    document.getElementById('start').onclick = function()
+    {
+        if (!timer)
+            timer = setInterval
+            (
+                function()
+                {
+                    var colors = ['yellow', 'red', 'green', 'blue', ''];
+                    document.body.style.backgroundColor = colors[Math.trunc(Math.random() * colors.length)];
+                },
+                100
+            );
+    };
+
+    document.getElementById('stop').onclick = function()
+    {
+        if (timer)
+            clearInterval(timer);
+        timer = null;
+    };
+</script>

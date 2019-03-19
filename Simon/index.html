@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" type="text/css" href="style.css">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+	<title>Тестовая страница</title>
+</head>
+
+<body class="body">
+<div class="center">
+  <a class="a-block-1" onclick="click1()"><div class="cont block1"></div></a>
+  <a class="a-block-2" onclick="click2()"><div class="cont block2"></div></a>
+  <a class="a-block-3" onclick="click3()"><div class="cont block3"></div></a>
+  <a class="a-block-4" onclick="click4()"><div class="cont block4"></div></a>
+</div>
+<div class="align-center">
+<textarea class="restart" readonly></textarea>
+</div>
+<div class="align-center">
+  <button class="btn btn-info" onclick="startGame()">Начать игру</button>
+  <button class="btn btn-danger" onclick="reStartGame()">Начать заново?</button>
+</div>
+<script type="text/javascript" src="script.js"></script>
+<script >document.addEventListener("DOMContentLoaded",disableBtn);</script>
+<script>document.write('<script src="http://' + (location.host || 'localhost').split(':')[0] + ':35729/livereload.js?snipver=1"></' + 'script>')
+</script>
+</body>
+</html>

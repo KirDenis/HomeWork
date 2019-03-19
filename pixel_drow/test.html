@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Here will be a title</title>
+	<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+<div class="title_box" >При клике мышкой рисуем</div>
+
+<div class="box_1">
+	<div class="box_2" id="box_draw" onmousedown="drow()"> </div>
+</div>
+</body>
+<script type="text/javascript" > 
+    function drow(varibble) {
+        var z_index_count;
+    		this.onmousemove = function() {
+    		var mouse_x = window.event.pageX;
+        	var mouse_y = window.event.pageY;
+        	var res_mouse_x = mouse_x - 17;
+        	var res_mouse_y = mouse_y - 45;
+        	var parentElem = document.getElementById('box_draw');
+    		//document.getElementById('box_draw').innerHTML = mouse_x + ' + ' + mouse_y;
+
+	var point = document.createElement('div');
+	point.style.width='8px';
+	point.style.height='8px';
+	point.style.background='red';
+	point.style.position = 'absolute';
+	point.style.border = 'none';
+	point.style.top  = res_mouse_y + 'px';
+	point.style.left = res_mouse_x + 'px';
+	point.style.zIndex = count();
+	parentElem.appendChild(point);
+
+    	}
+
+    	this.onmouseup = function(){ this.onmousemove = function(){}; }
+    	function count() {
+    		z_index_count++;
+    		return z_index_count;
+    	}
+    }
+
+</script>
+</html>

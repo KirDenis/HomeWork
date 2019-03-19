@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Here will be a title</title>
+	<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+
+<body>
+<div class="box_field" id="main_box" >
+    <div class="first_player" id="f_player"></div>
+    <div class="second_player" id="s_player"></div>
+    <div class="ball" id="game_ball"></div>
+</div>
+</body>
+
+<script type="text/javascript" >
+    var BOTTOM_BORDER = 415;
+    var ball_move_side = 150;
+    var ball_move_top = 140;
+    var game_box = document.getElementById('main_box');
+    var game_box_right_side = game_box.getBoundingClientRect().right;
+    var game_box_left_side = game_box.getBoundingClientRect().left;
+    var game_box_top_side = game_box.getBoundingClientRect().top;
+    var ball_move = document.getElementById('game_ball');
+    var ball_left_colission = ball_move.getBoundingClientRect().left;
+function move_right_block(e) {
+
+    var first_block = document.getElementById('f_player');
+    var cs = window.getComputedStyle(first_block);
+    var top = parseInt(cs.marginTop);
+    switch(e.keyCode){
+
+        case 38:   // если нажата клавиша вверх
+            if(top>-120)
+                first_block.style.marginTop = top - 15 + "px";
+            break;
+        case 40:   // если нажата клавиша вниз
+            if(top < 140)
+                first_block.style.marginTop = top + 15 + "px";
+            break;
+    }
+ }
+function move_left_block(e) {
+
+    var second_player = document.getElementById('s_player');
+    var cs = window.getComputedStyle(second_player);
+    var top = parseInt(cs.marginTop);
+    switch(e.keyCode){
+        case 104:   // если нажата клавиша вверх
+            if(top>-120)
+                second_player.style.marginTop = top - 15 + "px";
+            break;
+        case 101:   // если нажата клавиша вниз
+            if(top < 140)
+                second_player.style.marginTop = top + 15 + "px";
+            break;
+    }
+}
+async function start_game() {
+    var ball = document.getElementById('game_ball');
+    while(true) {
+        ball_move_top = ball_move_top - 1;
+        ball_move_side = ball_move_side + 1;
+        ball.style.left = ball_move_side + "px";
+        ball.style.top = ball_move_top + "px";
+        await sleep(10);
+        if((isCollision() == 2) || (isCollision() == 1) || (isCollision() == 3) || (isCollision() == 4) || (isCollision() == 5) || (isCollision() == 6)) break;
+    }
+    move_ball();
+
+}
+async function move_ball() {
+        var ball = document.getElementById('game_ball');
+        while (true) {
+            await sleep(10);
+            switch (isCollision()) {
+                case 2: {
+                    console.log("коснулись верхней стороны");
+                    while (true) {
+                        await sleep(10);
+                        console.log("1");
+                        ball_move_top = ball_move_top + 1;
+                        ball_move_side = ball_move_side + 1;
+                        ball.style.left = ball_move_side + "px";
+                        ball.style.top = ball_move_top + "px";
+                        ball_left_colission = ball.style.left;
+                        if ((isCollision() == 5) || (isCollision() == 6) || (isCollision() == 4)) break;
+                    }
+                }
+                case 5: {
+                    console.log("коснулись правой стороны");
+                    while (true) {
+                        await sleep(10);
+                        console.log("2");
+                        ball_move_top = ball_move_top + 1;
+                        ball_move_side = ball_move_side - 1;
+                        ball.style.left = ball_move_side + "px";
+                        ball.style.top = ball_move_top + "px";
+                        ball_left_colission = ball.style.left;
+                        if ((isCollision() == 4) || (isCollision() == 2) || (isCollision() == 6)) break;
+                    }
+                }
+                case 4: {
+                    console.log("коснулись нижней стороны");
+                    while (true) {
+                        await sleep(10);
+                        console.log("3");
+                        ball_move_top = ball_move_top - 1;
+                        ball_move_side = ball_move_side - 1;
+                        ball.style.left = ball_move_side + "px";
+                        ball.style.top = ball_move_top + "px";
+                        ball_left_colission = ball.style.left;
+                        if ((isCollision() == 6) || (isCollision() == 5) || (isCollision() == 2)) break;
+                    }
+                }
+                case 6: {
+                    console.log("коснулись левой стороны");
+                    while (true) {
+                        await sleep(10);
+                        console.log("4");
+                        ball_move_top = ball_move_top - 1;
+                        ball_move_side = ball_move_side + 1;
+                        ball.style.left = ball_move_side + "px";
+                        ball.style.top = ball_move_top + "px";
+                        ball_left_colission = ball.style.left;
+                        if ((isCollision() == 2) || (isCollision() == 4) || (isCollision() == 5)) break;
+                    }
+                }
+                default: console.log("дефаут");
+            }
+
+        }
+    }
+function sleep(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+}
+function isCollision() {
+    {   // кординаты игровых элементов
+        var ball = document.getElementById('game_ball');
+        var ball_left_side = ball.getBoundingClientRect().left;
+        var ball_right_side = ball.getBoundingClientRect().right;
+        var ball_top_side = ball.getBoundingClientRect().top;
+        var ball_bottom_side = ball.getBoundingClientRect().bottom;
+
+        var left_block = document.getElementById('f_player');
+        var left_block_left_side = left_block.getBoundingClientRect().left;
+        var left_block_right_side = left_block.getBoundingClientRect().right;
+        var left_block_top_side = left_block.getBoundingClientRect().top;
+        var left_block_bottom_side = left_block.getBoundingClientRect().bottom;
+
+        var right_block = document.getElementById('s_player');
+        var right_block_left_side = right_block.getBoundingClientRect().left;
+        var right_block_right_side = right_block.getBoundingClientRect().right;
+        var right_block_top_side = right_block.getBoundingClientRect().top;
+        var right_block_bottom_side = right_block.getBoundingClientRect().bottom;
+    }
+    try { //колиззия блоков
+        {//чекаем коллизию левого блока для меча
+        if((left_block_bottom_side+10 > ball_bottom_side ) && (left_block_right_side == ball_left_side) && (ball_top_side > left_block_top_side-10))
+        {
+            return 1;
+        }
+        if((left_block_bottom_side+10 > ball_bottom_side ) && (left_block_right_side == ball_left_side) && (ball_top_side > left_block_top_side-10))
+        {
+            return 1;
+        }  //чекаем коллизию правого блока для меча
+        if((right_block_bottom_side+10 > ball_bottom_side ) && (right_block_left_side == ball_right_side) && (ball_top_side > right_block_top_side-10))
+        {
+            return 3;
+        }
+        if((right_block_bottom_side+10 > ball_bottom_side ) && (right_block_left_side == ball_right_side) && (ball_top_side > right_block_top_side-10))
+        {
+            return 3;
+        }
+
+        }
+        { // колизия границ поля
+            if (ball_top_side == game_box_top_side)
+            {
+                return 2;
+            }
+            if (ball_bottom_side == BOTTOM_BORDER)
+            {
+                console.log("нижняя сторона!");
+                return 4;
+            }
+            if (ball_right_side == game_box_right_side-5)
+            {
+                console.log("правая  сторона!");
+                return 5;
+            }
+            if (ball_left_side == game_box_left_side+5)
+            {
+                console.log("левая  сторона!");
+                return 6;
+            }
+
+        }
+
+    }
+    catch (e)
+    {
+        console.log("Error");
+    }
+
+}
+
+
+addEventListener("keydown", move_right_block);
+addEventListener("keydown", move_left_block);
+addEventListener("click", start_game);
+</script>
+</html>
